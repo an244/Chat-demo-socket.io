@@ -11,16 +11,24 @@ const io = require("socket.io")(server);
 
 server.listen(3000,()=>console.log('server started'));
 
+const usersArray = [];
+
 io.on("connection", socket =>{
 
- console.log('co nguoi ket noi: '+ socket.id);
+ console.log(socket.id + ' : Connected');
 
   socket.on('disconnect', () =>{
-
+    console.log(socket.id + ' : Disconnected!');
   });
 
-  socket.on('Client-send-data', (data)=>{
-   
+  socket.on('Client-send-UserName', (userNameFromLogin)=>{
+    const isExist = usersArray.some(user =>{
+      return user === userNameFromLogin;
+    });
+
+    if(isExist) return socket.emit('Server-send-Duplicate-user-Login-Fail',userNameFromLogin);
+    usersArray.push(userNameFromLogin);
+    socket.emit('Server-send-Login-successful', userNameFromLogin);
   });
 });
 
