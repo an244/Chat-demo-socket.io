@@ -1,0 +1,10 @@
+body{background-color: #b4b9c1}
+#Forms{width: 600px; margin: auto}
+#leftChatForm, #rightChatForm {min-height: 100px}
+#leftChatForm{width: 30%; float: left; background-color: #9ca7ba}
+#rightChatForm{width: 70%; float: right; background-color: #5974a3}
+#listOnline{border: solid 2px #f4020f; padding: 2px; font-weight: bold; text-align: center}
+#namesOnline{border: solid 2px #f4020f; border-top: none; padding: 2px; text-align: center}
+#sayHi{text-align: right}
+#listMessages{height: 100px; background-color: #c4b4b4}
+#txtMessage{border: solid 1px black}

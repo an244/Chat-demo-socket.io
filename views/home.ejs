@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Chat demo - Socket.io</title>
+<script src="jquery.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<link rel="stylesheet" type="text/css" href="layout.css"/>
+<script src="xuly.js"></script>
+</head>
+<body>
+  <div id="Forms"> 
+    <div id="loginForm">
+        <h3>Login Form</h3>
+        <input type ="text" name ="txtUserName" placeholder="NAME">
+        <br>
+        <button>Login</button>
+        </form>
+    </div>
+
+    <div id="chatForm">
+     <div id="leftChatForm">
+      <div id="listOnline">List Users Online</div>
+      <div id="namesOnline">
+        <div class="userOnline">ABC</div>
+        <div class="userOnline">ABC</div>
+        <div class="userOnline">ABC</div>
+        <div class="userOnline">ABC</div>
+        <div class="userOnline">ABC</div>
+      </div>
+     </div>
+
+     <div id="rightChatForm">
+      <div id="sayHi">Hello <span id="currentUser">Teo</span>
+        <input type="button" value="Logout" id="btnLogout">
+      </div>
+
+      <div id="listMessages">
+      </div>
+      <input type="text" name="txtMessage" id="txtMessage">
+      <input type="button" value="Send Message" id="btnSendMessage">
+     </div>
+    </div>
+  </div>
+
+</body>
+</html>

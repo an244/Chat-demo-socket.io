@@ -1,0 +1,24 @@
+{
+  "name": "demochat",
+  "version": "1.0.0",
+  "description": "chat demo using socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/an244/Chat-demo-socket.io.git"
+  },
+  "author": "Thien An",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/an244/Chat-demo-socket.io/issues"
+  },
+  "homepage": "https://github.com/an244/Chat-demo-socket.io#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "socket.io": "^2.0.3"
+  }
+}
