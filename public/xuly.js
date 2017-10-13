@@ -23,6 +23,7 @@ socket.on('Server-send-Login-successful',(newUserFromLogin)=>{
     $('#loginForm').hide();
     $('#chatForm').show();
     $('#currentUser').html(newUserFromLogin);
+    alert(newUserFromLogin+ ': login');
 }); 
 
 //Bước 2.2: client nhận mảng usersArray từ server để hiện thị trong List User Online
@@ -38,6 +39,15 @@ $('#btnLogout').click(()=>{
     socket.emit('user-logout');
     $('#loginForm').show();
     $('#chatForm').hide();
+});
+
+$('#btnSendMessage').click(()=>{
+    const contentMsgFromClient = $('#txtMessage').val();
+  socket.emit('Client-send-msg',contentMsgFromClient);
+});
+
+socket.on('Server-spread-msg-to-all-client',(userNameAndMessageFromServer)=>{
+    $('#listMessages').append("<div class='msg'>"+userNameAndMessageFromServer.username+ ": " + userNameAndMessageFromServer.message +"</div>");
 });
 
 

@@ -19,6 +19,9 @@ io.on("connection", socket =>{
 
   socket.on('disconnect', () =>{
     console.log(socket.id + ' : Disconnected!');
+    //xóa phần tử trong mảng.
+    usersArray.splice(usersArray.indexOf(socket.userNameSocket),1);
+    io.sockets.emit('Server-send-list-username-online',(usersArray));
   });
 
   //Bước 1.2: Server nhận user từ client gửi lên. Sau đó kiểm tra tên trong mảng 
@@ -51,6 +54,11 @@ io.on("connection", socket =>{
     //sử dụng lại sự kiện server gủi mảng usersArray để client cập nhật lại List User Online
     //bên client sẽ ko cần thêm sự nghe về sự kiện này vì đã viết trc đó rồi
     io.sockets.emit('Server-send-list-username-online',(usersArray));
+  });
+
+  socket.on('Client-send-msg', (contentMsgFromClient)=>{
+    
+    io.sockets.emit('Server-spread-msg-to-all-client',{username:socket.userNameSocket, message:contentMsgFromClient });
   });
 
 });
