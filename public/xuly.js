@@ -31,6 +31,14 @@ socket.on('Server-send-list-username-online', (usersArrayFromServer)=>{
     usersArrayFromServer.forEach((name)=>{
         $('#namesOnline').append("<div class='usersOnline'>"+name+ "</div>");
     });
-
 });
+
+//Bước 3.1: client gửi sự kiện user click nút logout 
+$('#btnLogout').click(()=>{
+    socket.emit('user-logout');
+    $('#loginForm').show();
+    $('#chatForm').hide();
+});
+
+
 });

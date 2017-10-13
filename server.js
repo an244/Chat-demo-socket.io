@@ -43,6 +43,16 @@ io.on("connection", socket =>{
 
   });
 
+//Bước 3.2: Server lăng nghe client gửi sự kiện user click nut logout.
+  socket.on('user-logout',()=>{
+    //xóa phần tử trong mảng.
+    usersArray.splice(usersArray.indexOf(socket.userNameSocket),1);
+
+    //sử dụng lại sự kiện server gủi mảng usersArray để client cập nhật lại List User Online
+    //bên client sẽ ko cần thêm sự nghe về sự kiện này vì đã viết trc đó rồi
+    io.sockets.emit('Server-send-list-username-online',(usersArray));
+  });
+
 });
 
 app.get('/',(req,res)=> {
