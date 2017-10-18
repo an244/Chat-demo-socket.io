@@ -23,7 +23,7 @@ socket.on('Server-send-Login-successful',(newUserFromLogin)=>{
     $('#loginForm').hide();
     $('#chatForm').show();
     $('#currentUser').html(newUserFromLogin);
-    alert(newUserFromLogin+ ': login');
+    
 }); 
 
 //Bước 2.2: client nhận mảng usersArray từ server để hiện thị trong List User Online
@@ -32,6 +32,10 @@ socket.on('Server-send-list-username-online', (usersArrayFromServer)=>{
     usersArrayFromServer.forEach((name)=>{
         $('#namesOnline').append("<div class='usersOnline'>"+name+ "</div>");
     });
+});
+
+socket.on('Server-alert-user-login',(userNameFromLogin)=>{
+    alert(userNameFromLogin+ " login!");
 });
 
 //Bước 3.1: client gửi sự kiện user click nút logout 
@@ -47,14 +51,14 @@ $('#btnSendMessage').click(()=>{
     const contentMsgFromClient = $('#txtMessage').val();
     //gửi nội dung chat lên server
   socket.emit('Client-send-msg',contentMsgFromClient);
-  $('#txtMessage').empty();
+  $('#txtMessage').html("");
 });
 
 //Bước 4.3: client lắng nghe dữ liệu "tên người chat + nội dung chat" gửi từ server.
 socket.on('Server-spread-msg-to-all-client',(userNameAndMessageFromServer)=>{
     //sau đó thêm nội dụng chat vô khung chat.
     $('#listMessages').append("<div class='msg'>"+userNameAndMessageFromServer.username+ ": " + userNameAndMessageFromServer.message +"</div>");
-    $('#txtMessage').empty();
+    $('#txtMessage').html("");
 });
 
 //Bước 5.1.1: client bắt sự kiện user trỏ chuột vào ô nhập liêu chat
@@ -65,7 +69,7 @@ $('#txtMessage').focusin(()=>{
 
 //Bước 5.1.4: client lắng nghe sự kiện gõ phím đáp trả từ server
 socket.on('Server-respond-user-is-typing',(userNameSocket)=>{
-    $('#chattingStatus').append("<div class='chatting'>"+userNameSocket+" is typing");
+    $('#chattingStatus').append("<div class='chatting'>"+userNameSocket+" is typing...");
 });
 
 //Bước 5.2.1: client bắt sự kiện user RỜI trỏ chuột khỏi ô nhập liêu chat
@@ -76,6 +80,6 @@ $('#txtMessage').focusout(()=>{
 
 //Bước 5.2.4: client lắng nghe sự kiện STOP gõ phím đáp trả từ server
 socket.on('Server-respond-user-stop-typing',(userNameSocket)=>{
-    $('#chattingStatus').clear();
+    $('#chattingStatus').html("");
 });
 });

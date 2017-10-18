@@ -44,6 +44,7 @@ io.on("connection", socket =>{
     //Bước 2.1: server gửi mảng userArray cho client để hiện trong phần List User Online
     io.sockets.emit('Server-send-list-username-online',(usersArray));
 
+    socket.broadcast.emit('Server-alert-user-login', userNameFromLogin);
   });
 
 //Bước 3.2: Server lăng nghe client gửi sự kiện user click nut logout.
