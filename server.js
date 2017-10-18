@@ -56,11 +56,23 @@ io.on("connection", socket =>{
     io.sockets.emit('Server-send-list-username-online',(usersArray));
   });
 
+  //Bước 4.2: server lắng nghe và nhận nội dung chát từ client
   socket.on('Client-send-msg', (contentMsgFromClient)=>{
-    
+    //sau đó server gửi "tên người chat + nội dung chat" cho tất client đang kết nối
     io.sockets.emit('Server-spread-msg-to-all-client',{username:socket.userNameSocket, message:contentMsgFromClient });
   });
 
+  //Bước 5.1.2: server lắng nghe sự kiện user gõ phím
+  socket.on('Client-user-is-typing',()=>{
+    //Bước 5.1.3: sau đó đáp trả sự kiện gõ phím cho tất cả client TRỪ thằng đang gõ
+    socket.broadcast.emit('Server-respond-user-is-typing',socket.userNameSocket);
+  });
+
+  //Bước 5.2.2: server lắng nghe sự kiện user STOP gõ phím
+  socket.on('Client-user-stop-typing',()=>{
+    //Bước 5.2.3: sau đó đáp trả sự kiện STOP gõ phím cho tất cả client TRỪ thằng đang RỜI
+    socket.broadcast.emit('Server-respond-user-stop-typing',socket.userNameSocket);
+  });
 });
 
 app.get('/',(req,res)=> {
