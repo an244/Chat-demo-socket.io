@@ -1,47 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Chat demo - Socket.io</title>
-<script src="jquery.js"></script>
-<script src="socket.io/socket.io.js"></script>
-<link rel="stylesheet" type="text/css" href="layout.css"/>
-<script src="xuly.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Chat demo - Socket.io</title>
+  <script src="jquery.js"></script>
+  <script src="socket.io/socket.io.js"></script>
+  <canvas id="myChart"></canvas>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+  <script src="chart.js"></script>
+  <link rel="stylesheet" type="text/css" href="layout.css" />
+  <script src="xuly.js"></script>
 </head>
+
 <body>
-  <div id="Forms"> 
+  <div class="container">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+  <script>
+    let galaxy = [312342, 678901, 123490, 333256, 878345, 45664];
+    let cgv = [412342, 778901, 223490, 433256, 978345, 55664]
+    let myChart = document.getElementById('myChart').getContext('2d');
+
+    //Global Options
+    Chart.defaults.global.defaultFontFamily = 'Arial';
+    Chart.defaults.global.defaultFontSize = 12;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let barChart = new Chart(myChart, {
+      type: 'bar', //bar, horizontalBar
+      data: {
+        labels: ['01.03.2019', '02.03.2019', '03.03.2019', '04.03.2019', '05.03.2019', '06.03.2019'],
+        datasets: [{
+          label: 'Số lượng suất Galaxy',
+          data: galaxy,
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 1,
+          borderColor: '#777',
+          hoverBorderWidth: 4,
+          hoverBorderColor: '#000'
+        },
+        {
+          label: 'Số lượng suất CGV',
+          data: cgv,
+          backgroundColor: ['rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 1,
+          borderColor: '#777',
+          hoverBorderWidth: 4,
+          hoverBorderColor: '#000'
+        }],
+        options: {
+          title: {
+            display: true,
+            text: 'Tên phim',
+            fontSize: 25
+          },
+          scales:{
+            xAxes:[{
+              stacked: true,
+            }],
+            yAxes:[{
+              stacked: true,
+              ticks:{
+                beginAtZero:true
+              }
+            }]
+          }//,
+          // legend:{
+          //   postion: 'right',
+          //   labels:{
+          //     fontColor: '#0000'
+          //   }
+          // }
+        }
+      }
+    });
+  </script>
+  <div id="Forms">
     <div id="loginForm">
-        <h3>Login Form</h3>
-        <input type ="text" id ="txtUserName" placeholder="NAME">
-        <br>
-        <input type="button" value="Login" id="btnLogin">
-        </form>
+      <h3>Login Form</h3>
+      <input type="text" id="txtUserName" placeholder="NAME">
+      <br>
+      <input type="button" value="Login" id="btnLogin">
+      </form>
     </div>
 
     <div id="chatForm">
-     <div id="leftChatForm">
-      <div id="listOnline">List Users Online</div>
-      <div id="namesOnline">
-        
-      </div>
-     </div>
+      <div id="leftChatForm">
+        <div id="listOnline">List Users Online</div>
+        <div id="namesOnline">
 
-     <div id="rightChatForm">
-      <div id="sayHi">Hello <span id="currentUser">Teo</span>
-        <input type="button" value="Logout" id="btnLogout">
+        </div>
       </div>
 
-      <div id="listMessages">
-      </div>
-      <div id="chattingStatus"></div>
+      <div id="rightChatForm">
+        <div id="sayHi">Hello <span id="currentUser">Teo</span>
+          <input type="button" value="Logout" id="btnLogout">
+        </div>
+
+        <div id="listMessages">
+        </div>
+        <div id="chattingStatus"></div>
         <input type="text" name="txtMessage" id="txtMessage">
         <input type="button" value="Send Message" id="btnSendMessage">
-      
-     </div>
+
+      </div>
     </div>
   </div>
 
 </body>
+
 </html>
